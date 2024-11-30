@@ -60,6 +60,7 @@ namespace project_MasterMind_1
 
 
         }
+        private int attemptsLeft = 10; // Maximaal aantal pogingen
 
         private void InitializeComboBoxes()
         {
@@ -74,7 +75,14 @@ namespace project_MasterMind_1
 
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            // Controleer of er nog pogingen zijn
+            if (attemptsLeft <= 0)
+            {
+                MessageBox.Show($"Het spel is afgelopen! De code was: {string.Join(", ", generatedCode)}");
+                return;
+            }
+
             Button sndr = (Button)sender;
 
      
@@ -117,6 +125,15 @@ namespace project_MasterMind_1
                     }
                 }
             }
+            // Verlaag het aantal resterende pogingen
+            attemptsLeft--;
+            MessageBox.Show($"Pogingen over: {attemptsLeft}");
+
+            // Controleer of het spel is afgelopen
+            if (attemptsLeft <= 0)
+            {
+                MessageBox.Show($"Het spel is afgelopen! De code was: {string.Join(", ", generatedCode)}");
+            }
 
 
 
@@ -155,12 +172,10 @@ namespace project_MasterMind_1
                 }
             }
 
-
-
-
-
         }
-    } 
+    }
+   
+
 }
 
 
